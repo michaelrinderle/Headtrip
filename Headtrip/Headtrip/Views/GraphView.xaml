@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Headtrip.Views.GraphView"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             BackgroundColor="Gray"
+             Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Open Database" Order="Secondary" Command="{Binding OpenDatabaseCommand }"/>
+        <ToolbarItem Text="Print Graph"  Order="Secondary" Command="{Binding PrintGraphCommand }"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <chart:SfChart
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                BackgroundColor="GhostWhite">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:DateTimeAxis/>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis Minimum="0" Maximum="250"/>
+                </chart:SfChart.SecondaryAxis>
+                <chart:SfChart.Series>
+                    <chart:FastLineSeries 
+                        StrokeWidth="2" 
+                        ItemsSource="{Binding GraphData, Mode=OneWay}" 
+                        Color="CornflowerBlue"
+                        ListenPropertyChange="True"/>
+                </chart:SfChart.Series>
+            </chart:SfChart>
+
+        </StackLayout>
+    </ContentPage.Content> 
+</ContentPage>

@@ -1,7 +1,13 @@
-﻿using Headtrip.ViewModels;
+﻿/*
+          __ _/| _/. _  ._/__ /
+        _\/_// /_///_// / /_|/
+                   _/
+        copyright (c) sof digital 2021
+        written by michael rinderle <michael@sofdigital.net>
+*/
+
 using Headtrip.Views;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Headtrip
@@ -11,13 +17,16 @@ namespace Headtrip
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
-            Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
+
+            Routing.RegisterRoute(nameof(MonitorView), typeof(MonitorView));
+            Routing.RegisterRoute(nameof(GraphView), typeof(GraphView));
+            Routing.RegisterRoute(nameof(SettingsView), typeof(SettingsView));
+            Routing.RegisterRoute(nameof(HelpView), typeof(HelpView));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Shell.Current.GoToAsync("//MonitorView");
         }
     }
 }
