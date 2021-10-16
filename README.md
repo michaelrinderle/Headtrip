@@ -23,7 +23,7 @@ This app logs time, emf, magnetometer raw sensor data, arbitrary magnitude, & ge
 
 # GRAPHING
 
-![Screenshot](graphs.gif)
+![Screenshot](graph.gif)
 
 # Download
 Download the Android APK from the release page : [Android Release v1.0](https://github.com/michaelrinderle/Headtrip/releases/download/v1.0/net.sofdigital.headtrip-v1.0.apk)
