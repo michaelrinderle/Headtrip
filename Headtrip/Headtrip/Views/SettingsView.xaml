@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:c="clr-namespace:Headtrip.Controls"
+             x:Class="Headtrip.Views.SettingsView"
+             BackgroundColor="Gray"
+             Title="{Binding Title}">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Database Options" Order="Secondary" Command="{Binding DumpDatabaseCommand }"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <Grid Margin="25,50,25,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <c:CLabel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Wakelock"/>
+            <Switch 
+                Grid.Row="0"
+                Grid.Column="2" 
+                ThumbColor="CornflowerBlue"
+                OnColor="Black"
+                IsToggled="{Binding Wakelock, Mode=TwoWay}"/>
+
+            <c:CLabel Grid.Row="1" Grid.Column="0" Padding="0,15,0,0" Text="Threshold" />
+            <c:CLabel Grid.Row="1" Grid.Column="1" Padding="0,15,0,0" HorizontalOptions="CenterAndExpand" Text="{Binding ThresholdRange}" TextColor="White"/>
+            <c:CSlider 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="EndAndExpand"
+                Grid.Row="1" 
+                Grid.Column="2" 
+                MinimumTrackColor="CornflowerBlue"
+                ThumbColor="CornflowerBlue"
+                Minimum="0" 
+                Maximum="250"
+                Value="{Binding ThresholdRange}" />
+
+            <c:CLabel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Padding="0,15,0,0" Text="Alarm"/>
+            <Switch 
+                Grid.Row="3" 
+                Grid.Column="2" 
+                ThumbColor="CornflowerBlue"
+                OnColor="Black"
+                IsToggled="{Binding ThresholdAlarm, Mode=TwoWay}"/>
+
+            <c:CLabel Grid.Row="4" Grid.Column="0" Padding="0,15,0,0" Text="Volume" />
+            <c:CLabel Grid.Row="4" Grid.Column="1" Padding="0,15,0,0" HorizontalOptions="CenterAndExpand" Text="{Binding ThresholdAlarmVolume}" TextColor="White"/>
+            <c:CSlider
+                Grid.Row="4" 
+                Grid.Column="2" 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="EndAndExpand"
+                MinimumTrackColor="CornflowerBlue"
+                ThumbColor="CornflowerBlue"         
+                Minimum="0" 
+                Maximum="10"
+                Value="{Binding ThresholdAlarmVolume}" />
+
+
+            <c:CLabel Grid.Row="5" Grid.Column="0" Padding="0,15,0,0" Text="Magnometer Speed" />
+            <c:CLabel Grid.Row="5" Grid.Column="1" Padding="0,15,0,0" HorizontalOptions="CenterAndExpand" Text="{Binding MagnometerSpeed}" TextColor="White"/>
+            <c:CSlider
+                Grid.Row="5" 
+                Grid.Column="2" 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="EndAndExpand"
+                MinimumTrackColor="CornflowerBlue"
+                ThumbColor="CornflowerBlue"         
+                Minimum="0" 
+                Maximum="3"
+                Value="{Binding MagnometerSpeed}" />
+                
+            <c:CLabel Grid.Row="6" Grid.Column="0" Padding="0,15,0,0" Text="Accelerator Speed" />
+            <c:CLabel Grid.Row="6" Grid.Column="1" Padding="0,15,0,0" HorizontalOptions="CenterAndExpand" Text="{Binding AcceleratorSpeed}" TextColor="White"/>
+            <c:CSlider
+                Grid.Row="6" 
+                Grid.Column="2" 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="EndAndExpand"
+                MinimumTrackColor="CornflowerBlue"
+                ThumbColor="CornflowerBlue"         
+                Minimum="0" 
+                Maximum="3"
+                Value="{Binding AcceleratorSpeed}" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

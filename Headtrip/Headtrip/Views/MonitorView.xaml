@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:Headtrip.Controls"
+    xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+    xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+    x:Class="Headtrip.Views.MonitorView"
+    BackgroundColor="DarkGray"
+    Title="{Binding Title}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Clear Log" Order="Secondary" Command="{Binding ClearLogCommand }"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        
+        <Grid Margin="15,15,15,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <c:CLabel  Grid.Row="0" Grid.Column="0" Text="GIMBALS" FontSize="14" />
+            <c:CLabel  Grid.Row="0" Grid.Column="1"  Text="X" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+            <c:CLabel  Grid.Row="0" Grid.Column="2"  Text="Y" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+            <c:CLabel  Grid.Row="0" Grid.Column="3"  Text="Z" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+
+            <c:CLabel  Grid.Row="1" Grid.Column="1"  Text="{Binding GimbalX}" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+            <c:CLabel  Grid.Row="1" Grid.Column="2"  Text="{Binding GimbalY}" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+            <c:CLabel  Grid.Row="1" Grid.Column="3"  Text="{Binding GimbalZ}" FontSize="12" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+
+            <c:CLabel Padding="0,10,0,0" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="EMF" FontSize="14"/>
+
+            <StackLayout 
+                Padding="80,-50,80,-50"
+                Grid.Row="3" 
+                Grid.Column="0" 
+                Grid.ColumnSpan="4">
+                <gauge:SfCircularGauge>
+                    <gauge:SfCircularGauge.Headers>
+                        <gauge:Header Text="{Binding EMF, Mode=OneWay, StringFormat='{0:F3} μT'}" ForegroundColor="Black" TextSize="20"/>
+                    </gauge:SfCircularGauge.Headers>
+                    <gauge:SfCircularGauge.Scales>
+                        <gauge:Scale StartValue="0" EndValue="250" Interval="20" RimColor="GhostWhite">
+                            <gauge:Scale.Ranges>
+                                <gauge:Range StartValue="0" EndValue="400" Color="Transparent"></gauge:Range>
+                            </gauge:Scale.Ranges>
+                            <gauge:Scale.Pointers>
+                                
+                                <gauge:NeedlePointer 
+                                    Value="{Binding EMF}" 
+                                    Type="Triangle" 
+                                    Color="CornflowerBlue"
+                                    KnobStrokeWidth="8" 
+                                    KnobColor="White" 
+                                    KnobRadiusFactor="0.05"/>
+                                
+                                <gauge:MarkerPointer 
+                                    Value="{Binding MaxEMF}" 
+                                    MarkerShape="Triangle" 
+                                    Color="Black" 
+                                    MarkerHeight="10" 
+                                    MarkerWidth="10"
+                                    Offset="1"/>
+                                
+                            </gauge:Scale.Pointers>
+                        </gauge:Scale>
+                    </gauge:SfCircularGauge.Scales>
+                </gauge:SfCircularGauge>
+            </StackLayout>
+
+            <c:CLabel  Grid.Row="4" Grid.Column="0" Text="TIMELINE" FontSize="14" />
+
+            <chart:SfChart
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                HeightRequest="200"
+                BackgroundColor="GhostWhite">
+                <chart:SfChart.PrimaryAxis>
+                    <chart:DateTimeAxis/>
+                </chart:SfChart.PrimaryAxis>
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis Minimum="0" Maximum="250"/>
+                </chart:SfChart.SecondaryAxis>
+                <chart:SfChart.Series>
+                    <chart:FastLineSeries 
+                        StrokeWidth="2" 
+                        ItemsSource="{Binding Timeline}" 
+                        Color="CornflowerBlue"
+                        ListenPropertyChange="True" 
+                        EnableAnimation="True"/>
+                </chart:SfChart.Series>
+            </chart:SfChart>
+
+
+            <c:CLabel Grid.Row="6" Grid.Column="0" Text="LOG" FontSize="14" />
+
+            <ListView 
+                Grid.Row="7" 
+                Grid.Column="0"
+                Grid.ColumnSpan="4"
+                x:Name="LogItemsListview"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                ItemsSource="{Binding LogItems}"
+                CachingStrategy="RecycleElement"
+                HasUnevenRows="true"
+                RowHeight="-1"
+                ItemAppearing="LogItemsListview_ItemAppearing"
+                HeightRequest="125">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*" />
+                                        <ColumnDefinition Width="3*" />
+                                    </Grid.ColumnDefinitions>
+                                    <c:LogLabel  Grid.Row="0" Grid.Column="0" Text="{Binding Created}" TextColor="Black"/>
+                                    <c:LogLabel  Grid.Row="0" Grid.Column="1" Text="{Binding EMF}" TextColor="Black"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
