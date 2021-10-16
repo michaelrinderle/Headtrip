@@ -171,4 +171,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\graph.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\splashscreen.png" />
+  </ItemGroup>
 </Project>

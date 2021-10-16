@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <!--<AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>C:\Users\michael\AppData\Local\Xamarin\Mono for Android\Keystore\Headtrip\Headtrip.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>cEc2MXbNFJf6aHlLKm38VZ9a1oX7W8dWx6LPdHe1ExwcFm8wlUw8</AndroidSigningStorePass>-->
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -176,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\graph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\mipmap-anydpi-v26\splashscreen.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
